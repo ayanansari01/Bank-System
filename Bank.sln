@@ -1,0 +1,112 @@
+using System;
+
+namespace CS_OOP
+{
+    class Account
+    {
+        public double account_balance;
+        public double withdrawal;
+        public bool a;
+
+        public void credit()
+        {
+            Console.Write("Enter the amount you want to credit: ");
+            account_balance = Double.Parse(Console.ReadLine());
+        }
+
+        public void debit()
+        {
+            Console.Write("Enter the amount you want to withdraw: ");
+            withdrawal = Double.Parse(Console.ReadLine());
+
+            if (withdrawal > account_balance)
+            {
+                Console.WriteLine("Debit amount exceeded account balance!!!");
+            }
+            else
+            {
+                account_balance = account_balance - withdrawal;
+                a = true;
+            }
+        }
+
+        public void get_balance()
+        {
+            Console.WriteLine("Current balance is: " + account_balance);
+        }
+    }
+
+    class Savings_account : Account
+    {
+        double interest_rate = 10.99;
+        double interest_earned;
+        public double calculate_interest()
+        {
+            interest_earned = interest_rate * account_balance;
+            return interest_earned;
+        }
+
+    }
+
+    class Checking_Account : Account
+    {
+        double transaction_fee = 10;
+        string input;
+        double account_balance1;
+        double account_balance2;
+        int switch1;
+
+        public void credit1()
+        {
+            account_balance = account_balance - transaction_fee;
+            Console.WriteLine("Balance after transaction fee deduction: " + account_balance);
+            Console.Write("Do you wish to add more credit? Reply with a Y/N: ");
+
+        top:
+            input = Console.ReadLine();
+            if (input == "y" || input == "Y")
+            {
+                Console.Write("Enter amount to be credited: ");
+                account_balance1 = int.Parse(Console.ReadLine());
+                //account_balance1 =+ account_balance;
+                account_balance2 = account_balance1 + account_balance;
+
+                Console.WriteLine("Current balance is: " + account_balance2);
+            }
+            else if (input == "n" || input == "N")
+            {
+                Console.WriteLine("No amount credited");
+            }
+            else
+            {
+                Console.WriteLine("Enter a valid alphabet!!!");
+                goto top;
+            }
+        }
+
+        public void debit1()
+        {
+            if (a = true)
+            {
+                account_balance2 = account_balance2 - transaction_fee;
+                Console.WriteLine("Balance after transaction fee deduction: " + account_balance2);
+            }
+        }
+
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("BANK\n");
+            Checking_Account d = new Checking_Account();
+            Savings_account c = new Savings_account();
+            d.credit();
+            d.debit();
+            d.get_balance();
+            c.calculate_interest();
+            d.credit1();
+        }
+    }
+}
